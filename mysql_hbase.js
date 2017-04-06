@@ -16,7 +16,7 @@ var connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
   password : 'rootpass',
-  database : 'eap'
+  database : 'test'
 });
 
 //Variables for the user defined column families - get assigned later
@@ -91,7 +91,7 @@ function encode(column){
  ********************************************************************************************/
 function getLastTS(){
 console.log('Getting the latest timestamp from the timestamp table');
-connection.query("select last_timestamp from eap_api_last_timestamp where Process_type = 'H'",function(err, rows, fields) {
+connection.query("select last_timestamp from api_last_timestamp where Process_type = 'H'",function(err, rows, fields) {
         if(err){
             console.log('Couldnt retrieve the latest timestamp from the table');
         }
@@ -249,7 +249,7 @@ function runCurl(rowNumber,ts, columnFamily, data){
 	console.log(row_key);
 
         //URL for the curl command where the results will be saved in HBase
-        url = 'http://g4t7565.houston.hpecorp.net:9090/alan_test/${task_id}';
+        url = 'http://localhost:9090/alan_test/${task_id}';
         if (data == null){
         return;
         }
